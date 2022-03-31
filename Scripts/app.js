@@ -8,18 +8,6 @@
 
 ((core) =>
 {
-    function AuthGuard() {
-      let protected_routes = [
-          "contact-list",
-          "task-list"
-      ];
-      if (protected_routes.indexOf(router.ActiveLink) > -1) {
-          if (!sessionStorage.getItem("user")) {
-              router.ActiveLink = "login";
-          }
-      }
-    }
-
     /**
      * Inject the Navigation bar into the Header element and highlight the active link based on the pageName parameter
      *
@@ -54,6 +42,25 @@
           $(this).css('cursor', 'pointer');
         });
       });
+    }
+
+    function AddLinkEvents(link) {
+        let linkQuery = $(`a.link[data=${link}]`);
+        linkQuery.off("click");
+        linkQuery.off("mouseover");
+        linkQuery.off("mouseout");
+        linkQuery.css("text-decoration", "underline");
+        linkQuery.css("color", "blue");
+        linkQuery.on("click", function () {
+            LoadLink(`${link}`);
+        });
+        linkQuery.on("mouseover", function () {
+            $(this).css("cursor", "pointer");
+            $(this).css("font-weight", "bold");
+        });
+        linkQuery.on("mouseout", function () {
+            $(this).css("font-weight", "normal");
+        });
     }
 
     /**
@@ -236,7 +243,7 @@
            {
             localStorage.removeItem($(this).val());
            }
-           location.href = "/contact-list.html"; // refresh the page
+           location.href = "/contact-list"; // refresh the page
          });
 
          $("#addButton").on("click", function() 
@@ -292,14 +299,14 @@
           localStorage.setItem(key, contact.serialize());
 
           // return to the contact list
-          location.href = "/contact-list.html";
+          location.href = "/contact-list";
           
         });
 
       $("#cancelButton").on("click", function()
       {
         // return to the contact list
-        location.href = "/contact-list.html";
+        location.href = "/contact-list";
       });
     }
 
@@ -339,8 +346,8 @@
           // hide any error message
           messageArea.removeAttr("class").hide();
 
-          // redirect user to secure area - contact-list.html
-          location.href = "/contact-list.html";
+          // redirect user to secure area - contact-list
+          location.href = "/contact-list";
         }
         else
         {
@@ -356,6 +363,7 @@
      */
     function displayLogin()
     {
+      AddLinkEvents("register");
 
       $("#loginButton").on("click", function() 
       {
@@ -381,7 +389,7 @@
 
     function displayRegister()
     {
-
+        AddLinkEvents("login");
     }
 
     function toggleLogin()
@@ -408,10 +416,20 @@
         {
           $(this).css('cursor', 'pointer');
         });
+
+        $("#tasklist").on("mouseover", function()
+        {
+          $(this).css('cursor', 'pointer');
+        });
        
         $(`<li class="nav-item">
         <a id="contact-list" class="nav-link" aria-current="page"><i class="fas fa-users fa-lg"></i> Contact List</a>
       </li>`).insertBefore("#loginListItem");
+
+        $(`<li class="nav-item">
+        <a id="tasklist" class="nav-link" aria-current="page"> Task List</a>
+      </li>`).insertBefore("#loginListItem");
+
       }
       else
       {
@@ -422,14 +440,14 @@
       }
     }
 
-    // function authGuard()
-    // {
-    //   if(!sessionStorage.getItem("user"))
-    //   {
-    //   // redirect back to login page
-    //   location.href = "/login";
-    //   }
-    // }
+    function authGuard()
+    {
+      if(!sessionStorage.getItem("user"))
+      {
+      // redirect back to login page
+      location.href = "/login";
+      }
+    }
 
     function display404()
     {
@@ -449,6 +467,7 @@
         case "edit": return displayEdit;
         case "login": return displayLogin;
         case "register": return displayRegister;
+        case "tasklist": return DisplayTaskList();
         case "404": return display404;
         default:
           console.error("ERROR: callback does not exist: " + activeLink);
@@ -494,6 +513,10 @@
      */
     function DisplayTaskList()
     {
+        authGuard();
+
+        console.log("Task list page")
+
         let messageArea = $("#messageArea");
         messageArea.hide();
         let taskInput = $("#taskTextInput");

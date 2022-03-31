@@ -97,7 +97,7 @@ router.AddTable(["/",
                  "/register", 
                  "/login", 
                  "/edit",
-                "/task-list"]);
+                 "/tasklist"]);
                 
 let route = location.pathname; // alias for location.pathname
 
