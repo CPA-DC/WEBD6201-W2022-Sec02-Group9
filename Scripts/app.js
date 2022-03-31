@@ -589,7 +589,7 @@
       </li>`).insertBefore("#loginListItem");
 
         $(`<li class="nav-item">
-        <a id="tasklist" class="nav-link" aria-current="page"> Task List</a>
+        <a id="tasklist" class="nav-link" aria-current="page"><i class="fas fa-list"></i> Task List</a>
       </li>`).insertBefore("#loginListItem");
 
       }
