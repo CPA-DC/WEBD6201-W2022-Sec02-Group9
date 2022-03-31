@@ -1,10 +1,10 @@
 {
-  "name": "webd6201-w2021-lab1b",
+  "name": "webd6201-w2022-lab3",
   "version": "1.0.0",
-  "description": "Demo Site for Lab 1",
+  "description": "Demo Site for Lab 3",
   "main": "app.js",
-  "repository": "https://github.com/durhamprogrammer/WEBD6201-W2021-ICE1b.git",
-  "author": "Tom Tsiliopoulos <tsiliopoulos@hotmail.com>",
+  "repository": "https://https://github.com/CPA-DC/WEBD6201-W2022-Sec02-Group9.git",
+  "author": "Katherine Bellman, Russell Waring",
   "license": "MIT",
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.2",
