@@ -8,6 +8,18 @@
 
 ((core) =>
 {
+    function AuthGuard() {
+      let protected_routes = [
+          "contact-list",
+          "task-list"
+      ];
+      if (protected_routes.indexOf(router.ActiveLink) > -1) {
+          if (!sessionStorage.getItem("user")) {
+              router.ActiveLink = "login";
+          }
+      }
+    }
+
     /**
      * Inject the Navigation bar into the Header element and highlight the active link based on the pageName parameter
      *
@@ -224,7 +236,7 @@
            {
             localStorage.removeItem($(this).val());
            }
-           location.href = "/contact-list"; // refresh the page
+           location.href = "/contact-list.html"; // refresh the page
          });
 
          $("#addButton").on("click", function() 
@@ -280,14 +292,14 @@
           localStorage.setItem(key, contact.serialize());
 
           // return to the contact list
-          location.href = "/contact-list";
+          location.href = "/contact-list.html";
           
         });
 
       $("#cancelButton").on("click", function()
       {
         // return to the contact list
-        location.href = "/contact-list";
+        location.href = "/contact-list.html";
       });
     }
 
@@ -328,7 +340,7 @@
           messageArea.removeAttr("class").hide();
 
           // redirect user to secure area - contact-list.html
-          location.href = "/contact-list";
+          location.href = "/contact-list.html";
         }
         else
         {
@@ -410,14 +422,14 @@
       }
     }
 
-    function authGuard()
-    {
-      if(!sessionStorage.getItem("user"))
-      {
-      // redirect back to login page
-      location.href = "/login";
-      }
-    }
+    // function authGuard()
+    // {
+    //   if(!sessionStorage.getItem("user"))
+    //   {
+    //   // redirect back to login page
+    //   location.href = "/login";
+    //   }
+    // }
 
     function display404()
     {
