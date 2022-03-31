@@ -1,0 +1,2 @@
+// namespace core
+let core;
