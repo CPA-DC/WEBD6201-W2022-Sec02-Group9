@@ -19,6 +19,13 @@
             this.m_activeLink = link;
         }
 
+         get LinkData() {
+            return this.m_linkData;
+        }
+        set LinkData(data) {
+            this.m_linkData = data;
+        }
+
         // Public methods
 
         /**

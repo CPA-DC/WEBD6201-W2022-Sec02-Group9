@@ -585,14 +585,14 @@
         {
           $(this).css('cursor', 'pointer');
         });
-       
-        $(`<li class="nav-item">
-        <a id="contact-list" class="nav-link" aria-current="page"><i class="fas fa-users fa-lg"></i> Contact List</a>
-      </li>`).insertBefore("#loginListItem");
+     
+            $(`<li class="nav-item">
+            <a id="contact-list" class="nav-link" aria-current="page"><i class="fas fa-users fa-lg"></i> Contact List</a>
+          </li>`).insertBefore("#loginListItem");
 
-        $(`<li class="nav-item">
-        <a id="tasklist" class="nav-link" aria-current="page"><i class="fas fa-list"></i> Task List</a>
-      </li>`).insertBefore("#loginListItem");
+            $(`<li class="nav-item">
+            <a id="tasklist" class="nav-link" aria-current="page"><i class="fas fa-list"></i> Task List</a>
+          </li>`).insertBefore("#loginListItem");
 
       }
       else
@@ -636,6 +636,7 @@
         case "register": return DisplayRegister;
         case "tasklist": return DisplayTaskList;
         case "404": return Display404;
+        case "/" : return DisplayHome;
         default:
           console.error("ERROR: callback does not exist: " + activeLink);
           break;
