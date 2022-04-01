@@ -616,10 +616,10 @@
 
     function Display404()
     {
-        $("#Return_home").on("click", () => 
+     /*    $("#Return_home").on("click", () => 
         {
           location.href = "/home";
-        });
+        }); */
     }
 
     function ActiveLinkCallBack(activeLink)
