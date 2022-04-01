@@ -99,7 +99,7 @@ router.AddTable(["/",
                  "/edit",
                  "/tasklist"]);
                 
-history.pushState('/');
+
 let route = location.pathname; // alias for location.pathname
 
 if(router.Find(route) > -1)
