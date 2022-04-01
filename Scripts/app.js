@@ -636,7 +636,6 @@
         case "register": return DisplayRegister;
         case "tasklist": return DisplayTaskList;
         case "404": return Display404;
-        case "/" : return DisplayHome;
         default:
           console.error("ERROR: callback does not exist: " + activeLink);
           break;
