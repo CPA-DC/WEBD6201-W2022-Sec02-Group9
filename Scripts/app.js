@@ -6,6 +6,8 @@
 
 "use strict";
 
+
+
 ((core) =>
 {
     /**
@@ -91,7 +93,7 @@
       });
     }
 
-    function displayHome()
+    function DisplayHome()
     {
         // Name of button and id are same... this is a naming convention. Button is actually an 'html element'
         console.log("Home Page");
@@ -124,7 +126,7 @@
         HeroImage.after(HeroParagraph);
     }
 
-    function displayAbout()
+    function DisplayAbout()
     {
 
        console.log("About Page");
@@ -183,7 +185,7 @@
 
     }
 
-    function displayProjects()
+    function DisplayProjects()
     {
         console.log("Projects Page");
 
@@ -212,7 +214,7 @@
         paraKB2.innerHTML = "Validation, NETD2202 final";
     }
 
-    function displayServices()
+    function DisplayServices()
     {
       console.log("Services Page");
         
@@ -338,7 +340,7 @@
       testEmailAddress();
     }
 
-    function displayContact()
+    function DisplayContact()
     {
       // form validation
       formValidation();
@@ -359,7 +361,7 @@
         });
     }
 
-    function displayContactList() 
+    function DisplayContactList() 
     {
       // don't allow visitors to go here
       authGuard();
@@ -396,26 +398,27 @@
 
         contactList.innerHTML = data;
 
+        
+        $("button.delete").on("click", function(){
+          if(confirm("Are you sure?"))
+          {
+            localStorage.removeItem($(this).val());
+          }
+          location.href = "/contact-list"; // refresh the page
+        });
+        
         $("button.edit").on("click", function(){
           location.href = "/edit#" + $(this).val();
          });
 
-         $("button.delete").on("click", function(){
-           if(confirm("Are you sure?"))
-           {
-            localStorage.removeItem($(this).val());
-           }
-           location.href = "/contact-list"; // refresh the page
-         });
-
-         $("#addButton").on("click", function() 
-         {
-          location.href = "/edit";
-         });
-      }
+        }
+      $("#addButton").on("click", function() 
+      {
+        location.href = "/edit";
+      });
     }
 
-    function displayEdit()
+    function DisplayEdit()
     {
       let key = location.hash.substring(1);
 
@@ -523,7 +526,7 @@
     /**
      * Displays and Processes the Login page
      */
-    function displayLogin()
+    function DisplayLogin()
     {
       AddLinkEvents("register");
 
@@ -549,7 +552,7 @@
       });
     }
 
-    function displayRegister()
+    function DisplayRegister()
     {
         AddLinkEvents("login");
     }
@@ -611,7 +614,7 @@
       }
     }
 
-    function display404()
+    function Display404()
     {
 
     }
@@ -620,17 +623,17 @@
     {
       switch (activeLink) 
       {
-        case "home": return displayHome;
-        case "about": return displayAbout;
-        case "projects": return displayProjects;
-        case "services": return displayServices;
-        case "contact": return displayContact;
-        case "contact-list": return displayContactList;
-        case "edit": return displayEdit;
-        case "login": return displayLogin;
-        case "register": return displayRegister;
-        case "tasklist": return DisplayTaskList();
-        case "404": return display404;
+        case "home": return DisplayHome;
+        case "about": return DisplayAbout;
+        case "projects": return DisplayProjects;
+        case "services": return DisplayServices;
+        case "contact": return DisplayContact;
+        case "contact-list": return DisplayContactList;
+        case "edit": return DisplayEdit;
+        case "login": return DisplayLogin;
+        case "register": return DisplayRegister;
+        case "tasklist": return DisplayTaskList;
+        case "404": return Display404;
         default:
           console.error("ERROR: callback does not exist: " + activeLink);
           break;
@@ -644,7 +647,7 @@
     {
       let messageArea = $("#messageArea");
       messageArea.hide();
-      let taskInput = $("#taskText");
+      let taskInput = $("#taskTextInput");
 
       if (taskInput.val() != "" && taskInput.val().charAt(0) != " ") 
       {
@@ -743,6 +746,6 @@
 
     window.addEventListener("load", Start);
 
-    core.Start = Start;
+  core.Start = Start;
 
 })(core || (core={}));
