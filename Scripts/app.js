@@ -103,7 +103,7 @@
         let AboutUsButton = document.getElementById("AboutUsButton");
         AboutUsButton.addEventListener("click", function()
         {
-            location.href = "about.html";
+            location.href = "/about.html";
         });
 
         // Step 1 - get a reference to an entry point
@@ -225,7 +225,7 @@
                 // text:"",
             },
             {
-                Service: "Divi Wordpress Development",
+                Service: "Web Development",
                 // text:"",
             },
             {
@@ -616,7 +616,10 @@
 
     function Display404()
     {
-
+        $("#Return_home").on("click", () => 
+        {
+          location.href = "/home";
+        });
     }
 
     function ActiveLinkCallBack(activeLink)
