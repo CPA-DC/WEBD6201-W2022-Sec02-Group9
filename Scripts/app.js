@@ -6,8 +6,6 @@
 
 "use strict";
 
-
-
 ((core) =>
 {
     /**
@@ -512,6 +510,7 @@
           messageArea.removeAttr("class").hide();
 
           // redirect user to secure area - contact-list
+          
           location.href = "/contact-list";
         }
         else
