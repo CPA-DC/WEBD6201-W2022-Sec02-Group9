@@ -3,23 +3,21 @@
 (function (core) {
     class Router {
         // constructors
-        constructor() 
-        {
+        constructor() {
             this.ActiveLink = "";
+            this.m_routingTable = []; // Initialize the routing table as an empty array
         }
 
         // Public Properties (getters and setters)
-        get ActiveLink() 
-        {
+        get ActiveLink() {
             return this.m_activeLink;
         }
 
-        set ActiveLink(link) 
-        {
+        set ActiveLink(link) {
             this.m_activeLink = link;
         }
 
-         get LinkData() {
+        get LinkData() {
             return this.m_linkData;
         }
         set LinkData(data) {
@@ -34,8 +32,7 @@
          * @param {string} route
          * @returns {void}
          */
-        Add(route) 
-        {
+        Add(route) {
             this.m_routingTable.push(route);
         }
 
@@ -43,11 +40,10 @@
          * This replaces the current Routing Table with a new one
          * Routes should begin with / character
          *
-         * @param {string} routingTable
+         * @param {string[]} routingTable
          * @returns {void}
          */
-        AddTable(routingTable) 
-        {
+        AddTable(routingTable) {
             this.m_routingTable = routingTable;
         }
 
@@ -58,8 +54,7 @@
          * @param {string} route
          * @returns {number}
          */
-        Find(route) 
-        {
+        Find(route) {
             return this.m_routingTable.indexOf(route);
         }
 
@@ -67,12 +62,11 @@
          * This method removes a route from the Routing Table
          * It returns true if the route was successfully removed,
          * otherwise it returns false
-         * 
+         *
          * @param {string} route
          * @returns {boolean}
          */
-        Remove(route) 
-        {
+        Remove(route) {
             if (this.Find(route) > -1) {
                 this.m_routingTable.splice(this.Find(route), 1);
                 return true;
@@ -81,12 +75,11 @@
         }
 
         /**
-         * This method returns the routing table as a comma-separated string 
+         * This method returns the routing table as a comma-separated string
          *
          * @returns {string}
          */
-        ToString() 
-        {
+        ToString() {
             return this.m_routingTable.toString();
         }
     }
@@ -94,28 +87,25 @@
 })(core || (core = {}));
 
 let router = new core.Router();
-router.AddTable(["/", 
-                 "/home", 
-                 "/about", 
-                 "/services", 
-                 "/contact", 
-                 "/contact-list", 
-                 "/projects", 
-                 "/register", 
-                 "/login", 
-                 "/edit",
-                 "/tasklist"]);
-                
+router.AddTable([
+    "/", // Root path should be included as "home"
+    "/home",
+    "/about",
+    "/services",
+    "/contact",
+    "/contact-list",
+    "/projects",
+    "/register",
+    "/login",
+    "/edit",
+    "/tasklist"
+]);
 
 let route = location.pathname; // alias for location.pathname
 
-if(router.Find(route) > -1)
-{
-    router.ActiveLink = (route == "/") ? "home" : route.substring(1)
-}
-else
-{
+// Check if the route exists in the routing table
+if (router.Find(route) > -1) {
+    router.ActiveLink = (route === "/") ? "home" : route.substring(1); // Use strict comparison (===)
+} else {
     router.ActiveLink = "404";
 }
-
-
