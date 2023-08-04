@@ -625,6 +625,7 @@
     {
       switch (activeLink) 
       {
+        case "/": return DisplayHome;       
         case "home": return DisplayHome;
         case "about": return DisplayAbout;
         case "projects": return DisplayProjects;
